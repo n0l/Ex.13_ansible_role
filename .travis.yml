@@ -16,3 +16,7 @@ env:
 before_install:
 - openssl aes-256-cbc -K $encrypted_071161ecb8aa_key -iv $encrypted_071161ecb8aa_iv
   -in secrets.tar.enc -out secrets.tar -d
+notifications:
+  slack:
+    rooms:
+      secure: FloDZ+G8ljHlDNRRbMK3/m8NMg4KbapfsZvx9BERmz9gKC0JVbpiQ2cNo9JHjgejU7RbyRb4H0vZS0+UbziaiTdIDtgbK8u2NuYhAEp27J1pGSoC9CFvdpOFqIE+gh2VzEqpBv/w1n27s1NCknTMhCRHTSpTj5hUhQ0Th7gRA3j/xtKgtkIzOkvNPxsCLDE9Nuz9Cs/KjsNmVL0XZK6dd/wWYJChaXJ+owpQz1goox3N3Is7tprBGLaeYFpoNaciFIVtbwkicW1pbk/VPM/qY6Dr5CuYDsFR2GoBzKVpLyvGK5Byf7eMM5a0n5S6WXk9B5kv9YFrVDRZ1PwZTlO3BUcp5o0VQIIpYMIxk0lbgIqP+dMHEjRR7lY8LUz5NC+U9odER/PIER4aoR7o+HyrNWezuHOEKs6xOtdk3fH9dsl0dS8X46EMK3iqMrzqtgCYSOymp2o5H7VyP/fjwwfF5ggWXdayc3FfiARuRQHABQDIdv5d1nVRJIdqi0kH39S69vEP+ljmC3O0dQLyHNZ+sQGiZ+F6NMp6ny1y2qn7/7QpX9b9OR/Di+T3ZqhtZsUUrejyhFGZr+ISScHeZF1vggulyMGszfx4IaKirSjGeM7S0XHPVKEPDf1nuKHVL3UUp4a/YOfnKQHmDqLMUjBG4HWS1Ju3NgarIAbA8qVher0=
