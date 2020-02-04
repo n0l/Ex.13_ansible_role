@@ -1,29 +1,18 @@
----
 language: python
-python: "2.7"
-
-# Use the new container infrastructure
-sudo: false
-
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
-
+python:
+- '3.6'
 install:
-  # Install ansible
-  - pip install ansible
-
-  # Check ansible version
-  - ansible --version
-
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
-
+- pip install ansible==2.3.0 molecule apache-libcloud
 script:
-  # Basic role syntax check
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
-
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+- molecule --debug test
+after_script:
+- molecule --debug destroy
+env:
+  global:
+  - secure: QpqZ2tkM1YMwUbN5e1PJyO5mCrAb6nN9yeK1U+HtIcHM5g6eqCj7y/EK+gR+U3t5VnFuWNoPv8GPuGqQqIyBGN2kcTbQMYa4Kul5e2pSd03osb8S0eBL7RaPovF6fBvsAaroUz/IFKBDDp8DiTcbpCyfPYNJajE/l3w2RSSHFyCjKm3FhbJAJrJVXLuXqDciqt1trlAzBA4s3luIrcVw9MA224jSb8O3zqnWHuLyPkeqecbNDr7BwhRgJNVEmkND44xBsUb4wqdk7JiUou4DEVNx5kKpzoX+RIMuqkeBAu4VahSmh64CT6jSuYWroXMr84K3dyye0z0065EcUZKtwurihpzyujGzY/4NLbsKT2o8wmgtMKo3m07VF5BgEU/XvnafmGy1A9t/Z6EPh1/KjApBziWEHwBadDWsSP0K3BL7md9m8DV5td5vOxNALNRwIHFWfIm2UNkXg3b45VsK6/lEDOPy6xP+c8uc1C+zfi1PRtFhjOx7DAWvLrb+Mh5RR0EgCzee5D9bLYuaBU9Itab47HpsjcSoSDs4+97LYq9kw87Fk4nxl+V/vBhUH8wNiOwqQgRV6Apfy2t+JEbBLnvTCl14v6y7+eka76mmJ/TIIk+gHBTyZRe0C3ulT4/jabAebvEATry1gjGn7SdCf5Gri4FsE9/3lHqve961F4w=
+  - secure: VfJ26IHtNXPPwEwiaYd6xe2xk/ET2HrGwcXOIRGyU8EyehAXjVJZOHqzlxsdWUZY4ayJku4sICNcrPZJEori9QKBC5XpYz6emmzIvYmjyaV6qPAaGuElsVy7fWfGG6jNv74MvhwNkot+haRuQMZ2pMNQ3tLa1jP0uyMvDEI3sr60VI+TfDeT6EUz6fmDJE/JAk8VCQCKiMvlicPHg+JBmqi1J6EWqlhOm+hsObQhCJwWQplB66jgzKkuFcVIq/zEjb5ySohaUk9KWr2aU3wjzz54pZcLLDi40A1QFr5sZ4EBiWFDVhShfixkAnmA/XJxuVFNnTWPs+xxCxRM9I5gG3MvEYOaEsRXVBPuHJ4O47z7X508zF611L0+LJMrHWWoX69gGX6DmhUCjME4tBX5F8pQE1bPsI3fH3yz4IihHkByeuep7lcbcWbZ9l35JI8kz9+aR4fqcFJ1UVJphV+jWx+tQXy23TGXDJFlTQA2eOUJ0RNp12WItivszn1Bni6TZmnlMdHM9E0rUe4R9zZ9d4MARsPu8so5wauUf154D830F8Hv7wAEBmJF6NI5RfxoxO3KB+Zacfb/zmUYRBy1GfdoBct31KiI5reKE5r7JQEG5LUrYHO9N92xQV23TR44KjB2igvFCEicha3cnvD9n6wtjsQ/m6kxqIHtbRAdgZI=
+  - secure: bnPeUzDX0nNPrzWPWsDYolzFNVDOLyLXyOa0X+RQ7YN+1ficvEO276qarRPiuulUNrCN5ujLD1C/pqIZH/hayVAtGaJ4sF/288NGr42LeO6Yz065oPEov0vxa9yJ61b1lCka8QZ7F0W5R+W2mFzsEbw2PZib35+aP/u5qz4RMarURB3T+AerO5PrFsD5uOzSDAMYXAOGf5AQlC7uRpJAtuy5c+0KR0TkkgcX6uQiNYLPlWaoqCVmT+Yyj50vCg+Y3uvvxQNp+WADjxy+w/uUUHuGE3rIQ89gWaGfBBfHBbohYinb4zQ+jijRGZQ3b3Y8V6CAIHsVSm9poD1bPDBd197mPYhJJzpdyeyBJukZ0jHY9l1CcY+wXsuUD4+ZneP/v/6GFLLNNrSnvypMCgh5vdvdFPIB9+NH1uJLXXy4qNYKvsaxz8xAwiPtzoXmQalxB9ADPbAiz7Qg2/7ws+MBapOIRTLO916f2kWn7gsprGlaHcxICVokTf6HmJaFsg6qH7CeJ2sHpZJSrUh/9B6EGuK7EVbLxoLFacDfXYtqq/Dp5Yav09omiIgBsslQ2ZBx7cKs8IgaRzvOFvkuxJfVzHR0yJKPyvQ6uKZPfbgr3JwrKhzhVb7zZILeXQL0mgzkgcJ7KMs59G6S0u6FmmJnKkAW0YfRtBXuAWofcARGyH8=
+  - secure: FHfpa6UY2NenYr9TD+Tw4SC/cGQQF3HQ8pplvrp/8Meq6btg4yYpHkUgW5ySDLlTdO6efgWdsZpZxaNlnrx7QpS4YTvPlSVYD9j/+AlSV7XZw0qjH374vB5Ff+v/7zvkiijJEpuVsG1n8h2Xl2ksKQ6wHxt3nzo/hzc9fleU3OVCaU9eQmDFBDS5sRIxdfzkoZdFCyqk0lrpQGXvixH7+b2k9m6KxiJS4ZWiTEhBxW/rruKhJl5HVMVjUppsgdCrcfinRy4kAYQN1x/KriZtXW/DZpfZWTUazf6SFv3vkzqMcZZqTPNZHx946a3rfSaV3/1/M1kkrk66Fz4cew5WxaD6sk5inyw8KIUF4wqPvK81wtgWk6EvWASdDkRXN8C1/WJxMO9X1YMR6qZK6mEImIwDgBALaF6RLeaHudqawATSeP2j0uyZPvq58fKUQDVczcZ/zkR+8cDdLe6+Z3FzBcCckaWKRUmQ2bh9SvFJPxSSCkVrcv0EqvH9XCy6ZH7MNc9uFRtnnrhdLgqGhFlU9dGTrVbpR6Dv+X09LOSJvXqFe7x+WDhoiJcyQxbMVM2MMuI2wnmKeak7W+h5AZaOd8V68NNd+3mIBANcCV3+71cPWafdRukXzO/jG2O17dzRzUZNOHtbjc9WQQ2cOZQwhQzrBgehwEmYAYPHCJZNkI8=
+before_install:
+- openssl aes-256-cbc -K $encrypted_071161ecb8aa_key -iv $encrypted_071161ecb8aa_iv
+  -in secrets.tar.enc -out secrets.tar -d
