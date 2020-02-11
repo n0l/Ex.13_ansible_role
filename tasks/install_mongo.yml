@@ -1,8 +1,18 @@
 # Добавим ключ репозитория для последующей работы с ним
-- name: Add APT key
+- name: Add apt key for Mongo DB
   apt_key:
-    id: EA312927
-    keyserver: keyserver.ubuntu.com
+    url: https://www.mongodb.org/static/pgp/server-4.2.asc
+    state: present
+  tags: install
+
+- name: Install gnupg package
+  apt:
+    name: gnupg
+  tags: install
+
+- name: Add apt key for Mongo DB again
+  apt_key:
+    url: https://www.mongodb.org/static/pgp/server-4.2.asc
     state: present
   tags: install
 
