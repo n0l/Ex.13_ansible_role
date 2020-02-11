@@ -1,16 +1,19 @@
 # Добавим ключ репозитория для последующей работы с ним
 - name: Add apt key for Mongo DB
   apt_key:
+  become: True
     url: https://www.mongodb.org/static/pgp/server-4.2.asc
     state: present
   tags: install
 
 - name: Install gnupg package
+  become: True
   apt:
     name: gnupg
   tags: install
 
 - name: Add apt key for Mongo DB again
+  become: True
   apt_key:
     url: https://www.mongodb.org/static/pgp/server-4.2.asc
     state: present
