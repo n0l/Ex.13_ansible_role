@@ -1,7 +1,7 @@
 # Добавим ключ репозитория для последующей работы с ним
 - name: Add apt key for Mongo DB
-  apt_key:
   become: True
+  apt_key:
     url: https://www.mongodb.org/static/pgp/server-4.2.asc
     state: present
   tags: install
