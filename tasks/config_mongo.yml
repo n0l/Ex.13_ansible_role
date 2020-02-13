@@ -1,5 +1,6 @@
 ---
 - name: Change mongo config file
+  become: True
   template:
     src: templates/mongod.conf.j2
     dest: /etc/mongod.conf
